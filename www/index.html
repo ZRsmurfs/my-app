@@ -1,62 +1,55 @@
 <!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
 <html>
-  <head>
-    <title>File System Example</title>
-
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-  </head>
-  <body>
-  <p id="aaa">aaa</p>
-  </body>
-
-<script type="text/javascript" charset="utf-8">
-
-	document.getElementById("aaa").innerHTML += "goes here...init<br>";
-    // Wait for device API libraries to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-		document.getElementById("aaa").innerHTML += "goes here...onready<br>";
-		window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccess, fail);
-		document.getElementById("aaa").innerHTML += "endof111...onready<br>";
-    }
-
-    function onFileSystemSuccess(fileSystem) {
-		document.getElementById("aaa").innerHTML += "success<br>";
-        document.getElementById("aaa").innerHTML += fileSystem.name;
-        document.getElementById("aaa").innerHTML += fileSystem.root.name;
-		
-		 fileSystem.root.getFile("test_young.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-
-    }
-   function gotFileEntry(fileEntry) {
-        fileEntry.createWriter(gotFileWriter, fail);
-    }
-	function gotFileWriter(writer) {
-        writer.onwriteend = function(evt) {
-            document.getElementById("aaa").innerHTML += "contents of file now 'some sample text'<br>";
-            writer.truncate(11);
-            writer.onwriteend = function(evt) {
-                document.getElementById("aaa").innerHTML += "contents of file now 'some sample'<br>";
-                writer.seek(4);
-                writer.write(" different text");
-                writer.onwriteend = function(evt){
-                    document.getElementById("aaa").innerHTML += "contents of file now 'some different text'<br>";
-                }
-            };
-        };
-        writer.write("some sample text");
-    }
-
-    function fail(error) {
-		document.getElementById("aaa").innerHTML += "fail<br>";
-        document.getElementById("aaa").innerHTML += error.code;
-    }
-
-    </script>
- 
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+		<script>
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    console.log(cordova.file);
+}		
+</script>
+    </head>
+    <body>
+        <div class="app">
+            <h1>PhoneGap</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+				试试中文哈~试试<p>
+				试试文件存储<p>
+				<p><a href="http://192.168.199.171:8080/mobile_portal_server/Login.jsp">登录</a></p>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
 </html>
