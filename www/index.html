@@ -1,51 +1,10 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>demo</title>
 
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-  </head>
-  <body>
-  <font size=7 color=blue>
-  ver0111: <p>
-  <p id="log"></p>
-  </font>
-  </body>
+<frameset rows="90%,10%">
 
-  
-<script type="text/javascript" charset="utf-8">
-young_log("init00--");
-document.addEventListener('deviceready', onDeviceReady, false);
-young_log("init01--");
-var ready = false;
+  <frame src="http://192.168.191.1:8080/mobile_portal_server/frame_a.html">
+  <frame src="http://192.168.191.1:8080/mobile_portal_server/Login.jsp" >
 
-young_log("before while.");
-/*while(true)
-{
-	if(ready == true)
-	{
-		break;
-	}
-}
-young_log("ready detected.");
-*/
-young_log("ready:" + ready);
-//sleep(5000);
-young_log("ready:" + ready);
+</frameset>
 
-
-//---------------------------
-function sleep(d){
-  for(var t = Date.now();Date.now() - t <= d;);
-}
- 
-
-
-function young_log(message)
-{
-	document.getElementById("log").innerHTML += (message + "<p>");
-}
-
-    </script>
- <a href="http://192.168.191.1:8080/mobile_portal_server/Login.jsp">登录</a>
 </html>
