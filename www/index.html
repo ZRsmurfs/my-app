@@ -1,15 +1,20 @@
 <html>
 <head>
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script>
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady() {
-    console.log("goes here...");
-}		
-</script>
+
 </head>
 <body>
 hello world
-
+<p id="log">log2: </p>
+<script>
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+   young_log("goes here...");
+}		
+function young_log(message)
+{
+document.getElementById("log").innerHTML += (message + "<p>");
+} 
+</script>
 </body>
 </html>
